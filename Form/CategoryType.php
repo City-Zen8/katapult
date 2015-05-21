@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use AppBundle\Entity\CategoryRepository;
 
 class CategoryType extends AbstractType
 {
@@ -14,9 +15,15 @@ class CategoryType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
+       $builder
             ->add('name')
-            ->add('parent', null, array('property'=> 'name'))
+            ->add('parent', null, array(
+                'property'=> 'name', 
+                'query_builder' => function(CategoryRepository $er) {
+                    return $er->createQueryBuilder('c')->where('c.parent is null');
+                }
+            ))
+          
         ;
     }
     
