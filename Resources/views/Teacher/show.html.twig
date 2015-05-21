@@ -1,0 +1,33 @@
+{% extends "AppBundle:Teacher:layout.html.twig" %}
+
+{% block content -%}
+    {{include('AppBundle:Teacher:teacher_detail.html.twig',{ 'entity': entity})}}
+    
+
+
+<div class='col-sm-3 line-bottom'>
+        <a href="{{ path('teacher') }}">
+            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back to the list
+        </a>
+    </div>
+            <div class='col-sm-6'></div>
+    <div class='col-sm-3'>                
+        <ul class='list-inline'>
+            <li>
+                <a href="{{ path('teacher_edit', { 'id': entity.id }) }}">
+                    <button type="button" class="btn btn-primary">            
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
+                    </button>
+                </a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}  
+                    <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</button>
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+{%block column_list%}active{%endblock%}
+{%block column_add%}{%endblock%}
