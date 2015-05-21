@@ -3,30 +3,66 @@
 {% block content -%}
     <h1>Category list</h1>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th width='10%'>Show</th>
-                <th width='10%'>Edit</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <tr>
-                <td>{{ entity.name }}</td>
-                
-                <td width="10%">
-                    <a href="{{ path('category_show', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-eye-open" aria-hidden=""true"></span></a>
-                </td>
-                <td width="10%">
-                    <a href="{{ path('category_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-edit" aria-hidden=""true"></span></a>
-                </td>
-            </tr>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% for parent_categorie in entities %}
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading_{{parent_categorie.id}}">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{parent_categorie.id}}" aria-expanded="true" aria-controls="collapse_{{parent_categorie.id}}">
+                    {{parent_categorie.name}}
+                  </a>
+                </h4>
+              </div>
+              <div id="collapse_{{parent_categorie.id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading_{{parent_categorie.id}}">
+                <div class="panel-body">
+                    {% for sub_categorie in parent_categorie.sons %}
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="heading_{{sub_categorie.id}}">
+                                <h4 class="panel-title">
+                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{sub_categorie.id}}" aria-expanded="true" aria-controls="collapse_{{sub_categorie.id}}">
+                                    {{sub_categorie.name}}
+                                  </a>
+                                </h4>
+                              </div>
+                              <div id="collapse_{{sub_categorie.id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading_{{sub_categorie.id}}">
+                                <div class="panel-body">
+                                    {% for formations in sub_categorie.formations %}
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nom</th>
+                                                    <th width='10%'>Show</th>
+                                                    <th width='10%'>Edit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for formation in formations %}
+                                                <tr>
+                                                    <tr>
+                                                    <td>{{ formation.name }}</td>
+
+                                                    <td width="10%">
+                                                        <a href="{{ path('formation_show', { 'id': formation.id }) }}"><span class="glyphicon glyphicon-eye-open" aria-hidden=""true"></span></a>
+                                                    </td>
+                                                    <td width="10%">
+                                                        <a href="{{ path('formation_edit', { 'id': formation.id }) }}"><span class="glyphicon glyphicon-edit" aria-hidden=""true"></span></a>
+                                                    </td>
+                                                </tr>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    {% endfor %}                             
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+              </div>
+            </div>
+        </div>
+    {% endfor %}
         
-    {% endblock %}
+{% endblock %}
