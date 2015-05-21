@@ -27,33 +27,31 @@
                               </div>
                               <div id="collapse_{{sub_categorie.id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading_{{sub_categorie.id}}">
                                 <div class="panel-body">
-                                    {% for formations in sub_categorie.formations %}
-                                        <table class="table table-striped">
-                                            <thead>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Nom</th>
+                                                <th width='10%'>Show</th>
+                                                <th width='10%'>Edit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for formation in sub_categorie.formations %}
+                                            <tr>
                                                 <tr>
-                                                    <th>Nom</th>
-                                                    <th width='10%'>Show</th>
-                                                    <th width='10%'>Edit</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            {% for formation in formations %}
-                                                <tr>
-                                                    <tr>
-                                                    <td>{{ formation.name }}</td>
+                                                <td>{{ formation.name }}</td>
 
-                                                    <td width="10%">
-                                                        <a href="{{ path('formation_show', { 'id': formation.id }) }}"><span class="glyphicon glyphicon-eye-open" aria-hidden=""true"></span></a>
-                                                    </td>
-                                                    <td width="10%">
-                                                        <a href="{{ path('formation_edit', { 'id': formation.id }) }}"><span class="glyphicon glyphicon-edit" aria-hidden=""true"></span></a>
-                                                    </td>
-                                                </tr>
-                                                </tr>
-                                            {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    {% endfor %}                             
+                                                <td width="10%">
+                                                    <a href="{{ path('formation_show', { 'id': formation.id }) }}"><span class="glyphicon glyphicon-eye-open" aria-hidden=""true"></span></a>
+                                                </td>
+                                                <td width="10%">
+                                                    <a href="{{ path('formation_edit', { 'id': formation.id }) }}"><span class="glyphicon glyphicon-edit" aria-hidden=""true"></span></a>
+                                                </td>
+                                            </tr>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>                       
                                 </div>
                               </div>
                             </div>
