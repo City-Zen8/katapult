@@ -29,8 +29,7 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AppBundle:Category')->findAll();
-
+        $entities = $em->getRepository('AppBundle:Category')->findWithFormations();
         return array(
             'entities' => $entities,
         );
