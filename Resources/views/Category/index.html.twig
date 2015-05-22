@@ -1,7 +1,7 @@
 {% extends "AppBundle:Category:layout.html.twig" %}
 
 {% block content -%}
-    <h1>Category list</h1>
+    <h1>Liste des Formations</h1>
 
     {% for parent_categorie in entities %}
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -53,16 +53,19 @@
                                         {% endfor %}
                                         </tbody>
                                     </table> 
-                                        <a href="{{ path('formation_new_with_category', { 'categoryId': sub_categorie.id }) }}"><span class="glyphicon glyphicon-plus" aria-hidden=""true"></span> Add Formation</a>
+                                        <a href="{{ path('formation_new_with_category', { 'categoryId': sub_categorie.id }) }}"><span class="glyphicon glyphicon-plus" aria-hidden=""true"></span> Formation</a>
                                 </div>
-                              </div>
+                               </div>                                  
                             </div>
                         </div>
                     {% endfor %}
+                    <a href="{{ path('category_new_with_subcategory', { 'categoryId': parent_categorie.id }) }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Sous Catégorie</a>
+                
                 </div>
               </div>
             </div>
         </div>
     {% endfor %}
+    <a href="{{ path('category_new') }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"> Catégorie</span></a>
         
 {% endblock %}

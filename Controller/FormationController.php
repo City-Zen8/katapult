@@ -99,7 +99,7 @@ class FormationController extends Controller
         );
     }
     
-        /**
+     /**
      * Displays a form to create a new Formation entity.
      *
      * @Route("/new/{categoryId}", name="formation_new_with_category")

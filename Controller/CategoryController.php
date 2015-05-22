@@ -96,6 +96,32 @@ class CategoryController extends Controller
             'form'   => $form->createView(),
         );
     }
+    
+    /**
+     * Displays a form to create a new Formation entity.
+     *
+     * @Route("/new/{categoryId}", name="category_new_with_subcategory")
+     * @Method("GET")
+     * @Template("AppBundle:Category:new.html.twig")
+     */
+    public function newWithCategoryAction($categoryId)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository('AppBundle:Category')->find($categoryId);
+
+        if (!$category) {
+            throw $this->createNotFoundException('Unable to find Category entity.');
+        }
+        
+        $entity = new Category();
+        $entity->setParent($category);
+        $form = $this->createCreateForm($entity);
+
+        return array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        );
+    }
 
     /**
      * Finds and displays a Category entity.
